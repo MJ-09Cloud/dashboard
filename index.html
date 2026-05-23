@@ -3,113 +3,141 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Sprinter S.A. — Dashboard Financiero v2</title>
+<title>Sprinter S.A. — Dashboard Financiero v4</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
 <style>
 :root{
-  --navy:#1F3864;--blue:#2E75B6;--teal:#17375E;--ltblue:#EBF3FB;
+  --navy:#1F3864;--blue:#2E75B6;--teal:#17375E;--ltblue:#EBF3FB;--dkblue:#152744;
   --green:#375623;--ltgrn:#E2EFDA;--midgrn:#70AD47;
-  --red:#C00000;--ltred:#FCE4D6;--orange:#ED7D31;
-  --gold:#C9A227;--purp:#7030A0;--ltpurp:#EAD6F0;
+  --red:#C00000;--ltred:#FCE4D6;--orange:#ED7D31;--ltorange:#FDEBD0;
+  --gold:#C9A227;--ltgold:#FFF9C4;--purp:#7030A0;--ltpurp:#EAD6F0;
+  --teal2:#0D6E6E;--ltteal:#D0F0EF;
   --gray:#F0F4F9;--dgray:#8898aa;--border:#D1D9E6;--white:#fff;
   --text:#1a2533;--text2:#4a5a72;--text3:#8898aa;
 }
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#EEF2F7;color:var(--text);min-height:100vh;font-size:13px}
 
-/* ── TOP BAR ── */
-.topbar{background:var(--navy);color:#fff;padding:14px 20px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;position:sticky;top:0;z-index:100}
-.topbar h1{font-size:17px;font-weight:700;letter-spacing:.3px}
-.topbar-sub{font-size:11px;opacity:.65;margin-top:2px}
-.year-pill{display:flex;align-items:center;gap:8px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);border-radius:8px;padding:5px 12px}
-.year-pill label{font-size:11px;opacity:.8;text-transform:uppercase;letter-spacing:.5px;white-space:nowrap}
+/* ── TOPBAR ── */
+.topbar{background:var(--navy);color:#fff;padding:13px 20px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;position:sticky;top:0;z-index:100;box-shadow:0 2px 8px rgba(0,0,0,.25)}
+.topbar h1{font-size:16px;font-weight:700;letter-spacing:.2px}
+.topbar-sub{font-size:10px;opacity:.6;margin-top:2px}
+.year-pill{display:flex;align-items:center;gap:8px;background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.28);border-radius:8px;padding:5px 12px}
+.year-pill label{font-size:10px;opacity:.75;text-transform:uppercase;letter-spacing:.6px;white-space:nowrap}
 .year-pill select{background:transparent;border:none;color:#fff;font-size:15px;font-weight:700;cursor:pointer;outline:none;-webkit-appearance:none}
 .year-pill select option{background:var(--navy)}
 
 /* ── NAV ── */
-.nav{background:var(--white);border-bottom:1px solid var(--border);display:flex;gap:0;overflow-x:auto;padding:0 20px;position:sticky;top:57px;z-index:99}
-.nb{padding:11px 16px;font-size:12px;font-weight:600;color:var(--text2);border:none;background:none;cursor:pointer;border-bottom:3px solid transparent;white-space:nowrap;transition:all .15s;text-transform:uppercase;letter-spacing:.4px}
+.nav{background:var(--white);border-bottom:1px solid var(--border);display:flex;gap:0;overflow-x:auto;padding:0 20px;position:sticky;top:56px;z-index:99;box-shadow:0 1px 3px rgba(0,0,0,.06)}
+.nb{padding:11px 15px;font-size:11px;font-weight:700;color:var(--text3);border:none;background:none;cursor:pointer;border-bottom:3px solid transparent;white-space:nowrap;transition:all .15s;text-transform:uppercase;letter-spacing:.5px}
 .nb:hover{color:var(--navy)}.nb.active{color:var(--navy);border-bottom-color:var(--navy)}
 
 /* ── PAGES ── */
 .page{display:none;padding:20px}.page.active{display:block}
 
-/* ── KPI CARDS ── */
-.kpi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px;margin-bottom:20px}
-.kpi{background:var(--white);border-radius:10px;padding:14px 16px;border-top:3px solid var(--navy);position:relative}
-.kpi.c-navy{border-top-color:var(--navy)}.kpi.c-teal{border-top-color:var(--teal)}
-.kpi.c-green{border-top-color:var(--midgrn)}.kpi.c-red{border-top-color:var(--red)}
-.kpi.c-gold{border-top-color:var(--gold)}.kpi.c-purp{border-top-color:var(--purp)}
-.kpi.c-orange{border-top-color:var(--orange)}.kpi.c-blue{border-top-color:var(--blue)}
+/* ── KPI GRID ── */
+.kpi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(155px,1fr));gap:12px;margin-bottom:20px}
+.kpi{background:var(--white);border-radius:10px;padding:14px 15px;border-top:3px solid var(--navy);box-shadow:0 1px 3px rgba(0,0,0,.06)}
+.kpi.cn{border-top-color:var(--navy)}.kpi.ct{border-top-color:var(--teal)}
+.kpi.cg{border-top-color:var(--midgrn)}.kpi.cr{border-top-color:var(--red)}
+.kpi.cgo{border-top-color:var(--gold)}.kpi.cp{border-top-color:var(--purp)}
+.kpi.co{border-top-color:var(--orange)}.kpi.cb{border-top-color:var(--blue)}
+.kpi.ct2{border-top-color:var(--teal2)}
 .kpi-lbl{font-size:10px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:.5px;margin-bottom:5px}
-.kpi-val{font-size:21px;font-weight:800;color:var(--text);line-height:1;margin-bottom:5px}
-.kpi-yoy{font-size:11px;display:flex;align-items:center;gap:3px}
+.kpi-val{font-size:20px;font-weight:800;color:var(--text);line-height:1;margin-bottom:5px}
+.kpi-yoy{font-size:11px;display:flex;align-items:center;gap:3px;flex-wrap:wrap}
 .up{color:#2d6a2d}.dn{color:var(--red)}.ne{color:var(--text3)}
 
-/* ── SECTIONS ── */
-.sec{font-size:13px;font-weight:700;color:var(--navy);margin-bottom:12px;padding-bottom:6px;border-bottom:2px solid var(--ltblue);display:flex;align-items:center;gap:7px;text-transform:uppercase;letter-spacing:.4px}
-.chart-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(360px,1fr));gap:16px;margin-bottom:20px}
-.chart-card{background:var(--white);border-radius:10px;padding:16px;border:1px solid var(--border)}
-.chart-title{font-size:11px;font-weight:700;color:var(--text2);text-transform:uppercase;letter-spacing:.4px;margin-bottom:10px}
+/* ── SECTION TITLE ── */
+.sec{font-size:11px;font-weight:800;color:var(--navy);margin-bottom:12px;padding-bottom:6px;border-bottom:2px solid var(--ltblue);display:flex;align-items:center;gap:7px;text-transform:uppercase;letter-spacing:.5px}
+
+/* ── CHART CARDS ── */
+.chart-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(360px,1fr));gap:14px;margin-bottom:20px}
+.chart-card{background:var(--white);border-radius:10px;padding:15px;border:1px solid var(--border);box-shadow:0 1px 3px rgba(0,0,0,.05)}
+.chart-title{font-size:10px;font-weight:700;color:var(--text2);text-transform:uppercase;letter-spacing:.4px;margin-bottom:10px}
 .cw{position:relative;width:100%}
-.legend{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:8px;font-size:11px;color:var(--text2)}
+.legend{display:flex;flex-wrap:wrap;gap:9px;margin-bottom:8px;font-size:11px;color:var(--text2)}
 .li{display:flex;align-items:center;gap:4px}
 .ld{width:10px;height:10px;border-radius:2px;flex-shrink:0}
 
 /* ── TABLE ── */
-.tcard{background:var(--white);border-radius:10px;overflow:hidden;margin-bottom:20px;border:1px solid var(--border)}
+.tcard{background:var(--white);border-radius:10px;overflow:hidden;margin-bottom:20px;border:1px solid var(--border);box-shadow:0 1px 3px rgba(0,0,0,.05)}
 .tcard table{width:100%;border-collapse:collapse;font-size:11px}
 .tcard th{background:var(--navy);color:#fff;padding:8px 10px;text-align:center;font-weight:700;font-size:10px;letter-spacing:.3px;white-space:nowrap}
 .tcard th.tl{text-align:left}
 .tcard td{padding:7px 10px;text-align:right;border-bottom:1px solid #f0f4f9;color:var(--text)}
-.tcard td.tl{text-align:left;font-weight:600;color:var(--text)}
-.tcard td.grp{background:#EEF2F7;font-weight:800;color:var(--navy);font-size:10px;text-transform:uppercase;letter-spacing:.4px}
+.tcard td.tl{text-align:left;font-weight:600}
+.tcard td.grp{background:#EEF2F7;font-weight:800;color:var(--navy);font-size:10px;text-transform:uppercase;letter-spacing:.4px;padding:8px 10px}
 .tcard tr:hover td{background:#fafcff}
-.tcard .pos{color:#2d6a2d;font-weight:700}.tcard .neg{color:var(--red);font-weight:700}
-.tcard .cagr{background:#FFF9C4;font-weight:800;color:var(--navy)}
+.pos{color:#2d6a2d;font-weight:700}.neg{color:var(--red);font-weight:700}
+.cagr{background:#FFF9C4;font-weight:800;color:var(--navy)}
 
-/* ── RATIO PANEL ── */
-.ratio-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;margin-bottom:20px}
-.rg{background:var(--white);border-radius:10px;overflow:hidden;border:1px solid var(--border)}
-.rg-hdr{padding:9px 14px;font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.5px;color:#fff}
-.rg-hdr.liq{background:var(--blue)}.rg-hdr.sol{background:var(--green)}
-.rg-hdr.ren{background:var(--gold)}.rg-hdr.apal{background:var(--purp)}
-.rr{display:grid;grid-template-columns:1fr auto auto;gap:6px;align-items:center;padding:9px 14px;border-bottom:1px solid #f0f4f9;font-size:11px}
-.rr:last-child{border-bottom:none}
-.rn{color:var(--text2)}.rv{font-size:15px;font-weight:800;color:var(--navy)}
-.rref{font-size:10px;color:var(--text3);background:#f5f7fa;border-radius:3px;padding:2px 5px;white-space:nowrap}
-.ok{color:#2d6a2d}.warn{color:var(--red)}
+/* ── RATIOS PAGE ── */
+.ratio-group-wrap{margin-bottom:28px}
+.rg-title{display:flex;align-items:center;gap:10px;margin-bottom:10px;padding:10px 14px;border-radius:8px;color:#fff;font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.5px}
+.rg-title.liq{background:var(--blue)}
+.rg-title.cap{background:var(--teal2)}
+.rg-title.sol{background:var(--green)}
+.rg-title.ren{background:var(--gold)}
+.rg-title.apal{background:var(--purp)}
+.rg-title .rg-icon{font-size:18px}
+.rg-title .rg-desc{font-size:10px;font-weight:400;opacity:.85;margin-top:2px;text-transform:none;letter-spacing:0;line-height:1.4}
 
-/* ── WATERFALL ── */
+/* ratio cards grid */
+.ratio-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;margin-bottom:10px}
+.ratio-card{background:var(--white);border-radius:8px;padding:12px 14px;border:1px solid var(--border);display:grid;grid-template-columns:1fr auto;gap:4px;align-items:start}
+.rc-name{font-size:11px;font-weight:600;color:var(--text2);margin-bottom:2px}
+.rc-val{font-size:20px;font-weight:800;grid-column:2;grid-row:1/3;align-self:center;padding-left:12px}
+.rc-val.ok{color:#2d6a2d}.rc-val.warn{color:var(--red)}.rc-val.neu{color:var(--navy)}
+.rc-ref{font-size:10px;color:var(--text3);background:var(--gray);border-radius:3px;padding:1px 5px;display:inline-block;margin-top:2px}
+.rc-yoy{font-size:10px;margin-top:3px}
+
+/* summary box */
+.rg-summary{background:var(--gray);border-radius:8px;padding:12px 14px;margin-bottom:6px;font-size:12px;color:var(--text2);line-height:1.65;border-left:4px solid transparent}
+.rg-summary.liq{border-left-color:var(--blue)}
+.rg-summary.cap{border-left-color:var(--teal2)}
+.rg-summary.sol{border-left-color:var(--green)}
+.rg-summary.ren{border-left-color:var(--gold)}
+.rg-summary.apal{border-left-color:var(--purp)}
+.rg-summary b{color:var(--text)}
+.rg-summary .chip{display:inline-block;font-size:10px;font-weight:700;border-radius:4px;padding:1px 7px;margin-right:4px;vertical-align:middle}
+.chip-ok{background:var(--ltgrn);color:var(--green)}.chip-warn{background:var(--ltred);color:var(--red)}.chip-neu{background:var(--ltblue);color:var(--blue)}
+
+/* waterfall */
 .wf-card{background:var(--white);border-radius:10px;padding:16px;border:1px solid var(--border)}
-.wf-row{display:flex;align-items:center;justify-content:space-between;padding:6px 8px;border-radius:5px;margin-bottom:3px;font-size:12px}
-.wf-label{color:var(--text2);flex:1}
-.wf-pct{font-weight:800;font-size:13px;min-width:60px;text-align:right}
-.wf-bar{height:5px;border-radius:3px;margin-top:3px;transition:width .4s}
-.wf-row.total{background:var(--ltblue)}.wf-row.total .wf-label{font-weight:700;color:var(--navy)}
-.wf-row.sub-total{background:var(--ltgrn)}.wf-row.sub-total .wf-label{font-weight:700;color:var(--green)}
-.wf-row.final{background:var(--navy);border-radius:6px}.wf-row.final .wf-label{color:#fff;font-weight:800}.wf-row.final .wf-pct{color:#fff}
+.wf-title{font-size:10px;font-weight:800;color:var(--navy);text-transform:uppercase;letter-spacing:.5px;margin-bottom:12px}
+.wf-row{display:flex;align-items:center;gap:8px;padding:5px 8px;border-radius:5px;margin-bottom:2px}
+.wf-lbl{flex:1;font-size:12px;color:var(--text2)}.wf-pct{font-weight:800;font-size:13px;min-width:55px;text-align:right}
+.wf-bar{height:4px;border-radius:2px;margin-top:2px;transition:width .4s}
+.wf-row.total{background:var(--ltblue)}.wf-row.total .wf-lbl{font-weight:700;color:var(--navy)}
+.wf-row.sub{background:var(--ltgrn)}.wf-row.sub .wf-lbl{font-weight:700;color:var(--green)}
+.wf-row.final{background:var(--navy);border-radius:6px}
+.wf-row.final .wf-lbl{color:#fff;font-weight:800}.wf-row.final .wf-pct{color:#fff}
 
-/* ── NARRATIVE ── */
-.narr-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(330px,1fr));gap:14px;margin-bottom:20px}
-.narr{background:var(--white);border-radius:10px;padding:16px;border:1px solid var(--border)}
+/* narrative */
+.narr-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:12px;margin-bottom:20px}
+.narr{background:var(--white);border-radius:10px;padding:15px;border:1px solid var(--border)}
 .narr-badge{display:inline-block;font-size:10px;font-weight:700;border-radius:4px;padding:2px 8px;margin-bottom:7px;text-transform:uppercase;letter-spacing:.4px}
 .nb-warn{background:var(--ltred);color:var(--red)}.nb-ok{background:var(--ltgrn);color:var(--green)}
-.nb-info{background:var(--ltblue);color:var(--blue)}.nb-neu{background:#EEF2F7;color:var(--navy)}
+.nb-info{background:var(--ltblue);color:var(--blue)}.nb-neu{background:var(--gray);color:var(--navy)}
 .narr h3{font-size:13px;font-weight:700;color:var(--navy);margin-bottom:6px}
 .narr p{font-size:12px;color:var(--text2);line-height:1.7}
 
-.footer{background:var(--navy);color:rgba(255,255,255,.55);text-align:center;padding:12px;font-size:10px}
-@media(max-width:600px){.kpi-grid{grid-template-columns:repeat(2,1fr)}.ratio-grid{grid-template-columns:1fr}}
+.var-hdr{background:#1A3A5C;color:#fff;text-align:center;font-size:10px;letter-spacing:.3px}
+.var-pos{color:#2d6a2d;font-weight:700;text-align:center;font-size:12px}
+.var-neg{color:#C00000;font-weight:700;text-align:center;font-size:12px}
+.var-na{color:#8898aa;text-align:center}
+.footer{background:var(--navy);color:rgba(255,255,255,.5);text-align:center;padding:12px;font-size:10px}
+@media(max-width:600px){.kpi-grid{grid-template-columns:repeat(2,1fr)};.ratio-cards{grid-template-columns:1fr 1fr}}
 </style>
 </head>
 <body>
 
-<!-- TOP BAR -->
+<!-- TOPBAR -->
 <div class="topbar">
   <div>
-    <h1>Sprinter S.A. — Dashboard Financiero</h1>
-    <div class="topbar-sub">Cuentas No Consolidadas · PGC 2007 · Datos: hoja "Análisis Completo"</div>
+    <h1>🏃 Sprinter S.A. — Dashboard Financiero</h1>
+    <div class="topbar-sub">Cuentas No Consolidadas · PGC 2007 · Fuente: hoja "Análisis Completo"</div>
   </div>
   <div class="year-pill">
     <label>Año KPIs</label>
@@ -131,12 +159,12 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
   <button class="nb" onclick="show('inf',this)">Informe</button>
 </div>
 
-<!-- ═════════════════ DATA ═════════════════ -->
+<!-- ═══════════ DATA ═══════════ -->
 <script>
 const YRS=[2025,2024,2023,2022,2021,2020];
 const D={
   ventas:[650295492,662218431,585826108,519237601,399915776,397551943],
-  ebitda:[61144581,28608962,66659347,56465865,37910842,45156634],
+  ebitda:[60239333,54533486,67217242,56495031,38984594,45156634],
   ebit:[44485437,10015884,53178889,41796403,25360747,32307893],
   rn:[33878659,-13409134,37961050,34115210,18300736,24743800],
   aprov:[-394843505,-426903125,-357541965,-306888858,-241611494,-227796686],
@@ -155,11 +183,17 @@ const D={
   pn:[190741441,156862782,170271916,132310866,94504412,76203675],
   pnc:[17236475,30910671,44332197,59961412,48797623,23210281],
   pc:[179192314,204642151,177089546,143274164,143573140,110361351],
+  // Liquidez
   r_corr:[0.853663,0.713265,0.856598,1.03451,1.478788,1.202438],
   pr_acida:[0.301445,0.223571,0.322867,0.602426,0.999452,0.645769],
   r_tes:[0.100053,0.019646,0.044582,0.151627,0.561723,0.37065],
-  cap_dev_pos:[0.311281,0.121455,0.301051,0.277835,0.197072,0.338071],
-  cap_dev_neg:[3.21253,8.233533,3.321691,3.599264,5.074294,2.957963],
+  // Capacidad devolución
+  deuda_tot:[196428789,235552822,221421743,203235576,192370763,133571632],
+  cap_dev_pos:[0.306673,0.231513,0.303571,0.277978,0.202653,0.338071],
+  cap_dev_neg:[3.260806,4.319416,3.294121,3.597406,4.934533,2.957963],
+  cap_ban_pos:[1.201008,0.683936,1.094394,0.635071,0.56983,2.35179],
+  cap_ban_neg:[0.832634,1.462125,0.913748,1.574627,1.75491,0.425208],
+  // Solvencia
   garantia:[1.971046,1.665935,1.768994,1.651022,1.491262,1.570508],
   autonomia:[0.971046,0.665935,0.768994,0.651022,0.491262,0.570508],
   endeu1:[1.029817,1.501649,1.300401,1.536046,2.035574,1.752824],
@@ -167,65 +201,57 @@ const D={
   endeu_lp:[0.090366,0.197055,0.260361,0.453186,0.516353,0.304582],
   endeu2:[0.507345,0.600264,0.565293,0.605685,0.670573,0.636737],
   cob_int:[18.054822,-10.270812,87.981982,64.44087,34.950876,206.479086],
+  // Rentabilidad
   roe_ant:[0.231246,-0.126696,0.29715,0.343671,0.243463,0.413535],
   roe_desp:[0.177616,-0.085483,0.222944,0.257841,0.19365,0.324706],
   roa:[0.120604,-0.046151,0.130658,0.137651,0.082566,0.150953],
   m_econ:[0.071805,-0.027372,0.087361,0.088954,0.059228,0.079653],
   rotacion:[1.679611,1.6861,1.495623,1.547439,1.394041,1.895132],
+  // Apalancamiento
   coste_deuda:[0.013166,0.007486,0.002627,0.003527,0.003523,0.001148],
   apalancamiento:[1.917392,2.745218,2.274255,2.496691,2.948722,2.739492],
-  g_fin:[-2586254,-1763300,-581688,-716753,-677696,-153363],
+  // Márgenes
+  m_ebitda:[0.092634,0.08235,0.114739,0.108804,0.097482,0.113587],
+  m_ebit:[0.068408,0.015125,0.090776,0.080496,0.063415,0.081267],
+  m_neto:[0.052097,-0.020249,0.064799,0.065703,0.045761,0.06224],
+  // Financiero
   ing_fin:[3236506,3713317,2489704,1088873,67421,38976],
-  m_ebitda:[0.094,0.0432,0.1138,0.1087,0.0948,0.1136],
-  m_ebit:[0.0684,0.0151,0.0908,0.0805,0.0634,0.0813],
-  m_neto:[0.0521,-0.0202,0.0648,0.0657,0.0458,0.0622],
+  g_fin:[-2586254,-1763300,-581688,-716753,-677696,-153363],
 };
 
 const C={navy:'#1F3864',blue:'#2E75B6',teal:'#17375E',green:'#70AD47',
   red:'#C00000',gold:'#C9A227',purp:'#7030A0',orange:'#ED7D31',
-  dkgrn:'#375623',gray:'#8898aa'};
+  dkgrn:'#375623',gray:'#8898aa',teal2:'#0D6E6E'};
 const YL=YRS.map(String);
-const gc='rgba(0,0,0,0.06)';
+const gc='rgba(0,0,0,0.055)';
+let SI=0;
 
-let SI=0; // default 2025
+const fM=v=>{if(v==null||isNaN(+v))return'—';const n=+v,s=n<0?'-':'';return s+'€'+Math.abs(n/1e6).toFixed(1)+'M'};
+const fP=v=>{if(v==null||isNaN(+v))return'—';return((+v)*100).toFixed(1)+'%'};
+const fX=(v,d=2)=>{if(v==null||isNaN(+v))return'—';return(+v).toFixed(d)+'x'};
+const fN=(v,d=2)=>{if(v==null||isNaN(+v))return'—';return(+v).toFixed(d)};
 
-const fM=v=>{if(v==null||isNaN(v))return'—';const s=v<0?'-':'';return s+'€'+Math.abs(v/1e6).toFixed(1)+'M'};
-const fP=v=>{if(v==null||isNaN(v))return'—';return(v*100).toFixed(1)+'%'};
-const fX=v=>{if(v==null||isNaN(v))return'—';return v.toFixed(2)+'x'};
-const fN=(v,d=2)=>{if(v==null||isNaN(v))return'—';return v.toFixed(d)};
-
-function yoy(arr,i){
-  if(i===0)return null;
-  const c=arr[i],p=arr[i-1];
-  if(!p||p===0)return null;
-  return(c-p)/Math.abs(p);
-}
-function yoyHtml(arr,i){
+function yoy(arr,i){if(i===0)return null;const c=arr[i],p=arr[i-1];if(!p||p===0)return null;return(c-p)/Math.abs(p)}
+function yoyH(arr,i){
   const v=yoy(arr,i);
   if(v===null)return'<span class="ne">—</span>';
-  const up=v>=0;
-  return`<span class="${up?'up':'dn'}">${up?'▲':'▼'} ${Math.abs(v*100).toFixed(1)}%</span>`;
+  return`<span class="${v>=0?'up':'dn'}">${v>=0?'▲':'▼'} ${Math.abs(v*100).toFixed(1)}%</span><span class="ne" style="font-size:10px;margin-left:3px">vs ${YRS[i-1]}</span>`;
 }
-
-function upd(){
-  SI=parseInt(document.getElementById('ySel').value);
-  renderKPIs();renderRatios();renderWaterfall();
-}
+function upd(){SI=parseInt(document.getElementById('ySel').value);renderKPIs();renderRatios();renderWaterfall();buildTable()}
 function show(id,btn){
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
   document.querySelectorAll('.nb').forEach(b=>b.classList.remove('active'));
-  document.getElementById(id).classList.add('active');
-  btn.classList.add('active');
+  document.getElementById(id).classList.add('active');btn.classList.add('active');
 }
 </script>
 
-<!-- ═══════════════════════════════════════
-     PAGE 1 — OVERVIEW
-═══════════════════════════════════════ -->
+<!-- ══════════════════════════════════════════
+     PAGE 1 — VISIÓN GENERAL
+══════════════════════════════════════════ -->
 <div id="ov" class="page active">
   <div class="kpi-grid" id="kpis"></div>
 
-  <div class="sec">📈 Evolución de resultados 2020–2025</div>
+  <div class="sec">📈 Evolución de Resultados 2025 → 2020</div>
   <div class="chart-row">
     <div class="chart-card">
       <div class="chart-title">Ventas · EBITDA · EBIT · Resultado Neto (€M)</div>
@@ -233,13 +259,13 @@ function show(id,btn){
       <div class="cw" style="height:240px"><canvas id="c1"></canvas></div>
     </div>
     <div class="chart-card">
-      <div class="chart-title">Márgenes % sobre ventas</div>
+      <div class="chart-title">Márgenes % sobre Ventas</div>
       <div class="legend" id="l2"></div>
       <div class="cw" style="height:240px"><canvas id="c2"></canvas></div>
     </div>
   </div>
 
-  <div class="sec">⚖️ Estructura patrimonial</div>
+  <div class="sec">⚖️ Estructura Patrimonial</div>
   <div class="chart-row">
     <div class="chart-card">
       <div class="chart-title">PN · PNC · PC apilados (€M)</div>
@@ -254,23 +280,23 @@ function show(id,btn){
   </div>
 </div>
 
-<!-- ═══════════════════════════════════════
+<!-- ══════════════════════════════════════════
      PAGE 2 — P&L
-═══════════════════════════════════════ -->
+══════════════════════════════════════════ -->
 <div id="pyl" class="page">
-  <div class="sec">💰 Cuenta de resultados</div>
+  <div class="sec">💰 Cuenta de Resultados</div>
   <div class="chart-row">
     <div class="chart-card">
       <div class="chart-title">Ventas vs EBITDA (€M)</div>
       <div class="cw" style="height:260px"><canvas id="cp1"></canvas></div>
     </div>
     <div class="chart-card">
-      <div class="chart-title">Estructura costes % s/Ventas</div>
+      <div class="chart-title">Estructura de Costes % s/Ventas</div>
       <div class="legend" id="lp2"></div>
       <div class="cw" style="height:260px"><canvas id="cp2"></canvas></div>
     </div>
   </div>
-  <div class="sec">💧 Cascada de márgenes — año seleccionado</div>
+  <div class="sec">💧 Cascada de Márgenes — año seleccionado</div>
   <div class="chart-row">
     <div class="wf-card" id="wfCard"></div>
     <div class="chart-card">
@@ -280,11 +306,11 @@ function show(id,btn){
   </div>
 </div>
 
-<!-- ═══════════════════════════════════════
+<!-- ══════════════════════════════════════════
      PAGE 3 — BALANCE
-═══════════════════════════════════════ -->
+══════════════════════════════════════════ -->
 <div id="bal" class="page">
-  <div class="sec">⚖️ Balance completo</div>
+  <div class="sec">⚖️ Estructura del Balance</div>
   <div class="chart-row">
     <div class="chart-card">
       <div class="chart-title">ANC vs AC (€M)</div>
@@ -309,310 +335,514 @@ function show(id,btn){
   </div>
 </div>
 
-<!-- ═══════════════════════════════════════
+<!-- ══════════════════════════════════════════
      PAGE 4 — RATIOS
-═══════════════════════════════════════ -->
+══════════════════════════════════════════ -->
 <div id="rat" class="page">
-  <div class="sec">📐 Ratios — año seleccionado</div>
-  <div class="ratio-grid" id="ratioPanel"></div>
-  <div class="sec">📊 Evolución de ratios 2020–2025</div>
-  <div class="chart-row">
-    <div class="chart-card">
-      <div class="chart-title">Liquidez</div>
-      <div class="cw" style="height:210px"><canvas id="cr1"></canvas></div>
+
+  <!-- ── 1. LIQUIDEZ ── -->
+  <div class="ratio-group-wrap">
+    <div class="rg-title liq">
+      <span class="rg-icon">💧</span>
+      <div>
+        <div>Ratios de Liquidez</div>
+        <div class="rg-desc">Miden la capacidad de la empresa para hacer frente a sus obligaciones de corto plazo con sus activos más líquidos.</div>
+      </div>
     </div>
-    <div class="chart-card">
-      <div class="chart-title">Endeudamiento</div>
-      <div class="cw" style="height:210px"><canvas id="cr2"></canvas></div>
-    </div>
-    <div class="chart-card">
-      <div class="chart-title">ROE / ROA %</div>
-      <div class="cw" style="height:210px"><canvas id="cr3"></canvas></div>
-    </div>
-    <div class="chart-card">
-      <div class="chart-title">Años devolución deuda</div>
-      <div class="cw" style="height:210px"><canvas id="cr4"></canvas></div>
+    <div class="ratio-cards" id="rc_liq"></div>
+    <div class="rg-summary liq" id="rs_liq"></div>
+    <div class="chart-row">
+      <div class="chart-card">
+        <div class="chart-title">Evolución Ratios de Liquidez 2025→2020</div>
+        <div class="legend" id="ll1"></div>
+        <div class="cw" style="height:200px"><canvas id="rl1"></canvas></div>
+      </div>
     </div>
   </div>
-</div>
 
-<!-- ═══════════════════════════════════════
+  <!-- ── 2. CAPACIDAD DE DEVOLUCIÓN ── -->
+  <div class="ratio-group-wrap">
+    <div class="rg-title cap">
+      <span class="rg-icon">🔄</span>
+      <div>
+        <div>Capacidad de Devolución de Deuda</div>
+        <div class="rg-desc">Indican cuántos años necesitaría la empresa para devolver toda su deuda con el EBITDA generado, o cuántas veces cubre la deuda con el EBITDA.</div>
+      </div>
+    </div>
+    <div class="ratio-cards" id="rc_cap"></div>
+    <div class="rg-summary cap" id="rs_cap"></div>
+    <div class="chart-row">
+      <div class="chart-card">
+        <div class="chart-title">Años de Devolución de Deuda (Deuda/EBITDA)</div>
+        <div class="cw" style="height:200px"><canvas id="rl2"></canvas></div>
+      </div>
+      <div class="chart-card">
+        <div class="chart-title">Cap. Devolución (EBITDA/Deuda) — veces</div>
+        <div class="cw" style="height:200px"><canvas id="rl2b"></canvas></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── 3. SOLVENCIA ── -->
+  <div class="ratio-group-wrap">
+    <div class="rg-title sol">
+      <span class="rg-icon">🏛️</span>
+      <div>
+        <div>Ratios de Solvencia</div>
+        <div class="rg-desc">Evalúan la estructura de capital y la capacidad de la empresa para cubrir sus deudas totales con sus activos y patrimonio neto.</div>
+      </div>
+    </div>
+    <div class="ratio-cards" id="rc_sol"></div>
+    <div class="rg-summary sol" id="rs_sol"></div>
+    <div class="chart-row">
+      <div class="chart-card">
+        <div class="chart-title">Endeudamiento I (Deuda/PN) y Garantía</div>
+        <div class="legend" id="ls3"></div>
+        <div class="cw" style="height:200px"><canvas id="rl3"></canvas></div>
+      </div>
+      <div class="chart-card">
+        <div class="chart-title">Cobertura de Intereses (EBIT/GF)</div>
+        <div class="cw" style="height:200px"><canvas id="rl3b"></canvas></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── 4. RENTABILIDAD ── -->
+  <div class="ratio-group-wrap">
+    <div class="rg-title ren">
+      <span class="rg-icon">📈</span>
+      <div>
+        <div>Ratios de Rentabilidad</div>
+        <div class="rg-desc">Miden la eficiencia con la que la empresa genera beneficios en relación a sus ventas, activos y patrimonio neto.</div>
+      </div>
+    </div>
+    <div class="ratio-cards" id="rc_ren"></div>
+    <div class="rg-summary ren" id="rs_ren"></div>
+    <div class="chart-row">
+      <div class="chart-card">
+        <div class="chart-title">ROE antes y después de impuestos %</div>
+        <div class="legend" id="lr4"></div>
+        <div class="cw" style="height:200px"><canvas id="rl4"></canvas></div>
+      </div>
+      <div class="chart-card">
+        <div class="chart-title">ROA % y Margen Económico %</div>
+        <div class="legend" id="lr4b"></div>
+        <div class="cw" style="height:200px"><canvas id="rl4b"></canvas></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── 5. APALANCAMIENTO ── -->
+  <div class="ratio-group-wrap">
+    <div class="rg-title apal">
+      <span class="rg-icon">🔧</span>
+      <div>
+        <div>Apalancamiento Financiero</div>
+        <div class="rg-desc">Mide el efecto de la deuda sobre la rentabilidad financiera. Un AF &gt; 1 indica que endeudarse amplifica la rentabilidad cuando el ROA supera el coste de la deuda.</div>
+      </div>
+    </div>
+    <div class="ratio-cards" id="rc_apal"></div>
+    <div class="rg-summary apal" id="rs_apal"></div>
+    <div class="chart-row">
+      <div class="chart-card">
+        <div class="chart-title">Apalancamiento Financiero (RF/RE) — evolución</div>
+        <div class="cw" style="height:200px"><canvas id="rl5"></canvas></div>
+      </div>
+      <div class="chart-card">
+        <div class="chart-title">ROE (ant.) vs ROA vs Coste Deuda %</div>
+        <div class="legend" id="lr5b"></div>
+        <div class="cw" style="height:200px"><canvas id="rl5b"></canvas></div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- end ratios page -->
+
+<!-- ══════════════════════════════════════════
      PAGE 5 — TABLA COMPARATIVA
-═══════════════════════════════════════ -->
+══════════════════════════════════════════ -->
 <div id="tab" class="page">
-  <div class="sec">📋 Tabla comparativa 2020–2025 + CAGR</div>
+  <div class="sec">📋 Tabla Comparativa — <span id="tabTitle">2025 vs 2024</span></div>
   <div class="tcard" id="bigTable"></div>
 </div>
 
-<!-- ═══════════════════════════════════════
+<!-- ══════════════════════════════════════════
      PAGE 6 — INFORME
-═══════════════════════════════════════ -->
+══════════════════════════════════════════ -->
 <div id="inf" class="page">
-  <div class="sec">📄 Informe financiero — Sprinter S.A.</div>
+  <div class="sec">📄 Informe Financiero — Sprinter S.A.</div>
   <div class="narr-grid">
-    <div class="narr"><span class="narr-badge nb-warn">Alerta</span><h3>💧 Liquidez y Tesorería</h3><p>El ratio corriente se sitúa en 0.85x en 2025, por debajo de la unidad, indicando que el pasivo corriente supera al activo corriente. La tesorería se contrajo desde €80.6M (2021) hasta €4.0M (2024), recuperándose a €17.9M en 2025. La prueba ácida (0.30x) confirma la dependencia de existencias para hacer frente a compromisos inmediatos.</p></div>
-    <div class="narr"><span class="narr-badge nb-ok">Positivo</span><h3>🏦 Solvencia y Endeudamiento</h3><p>Ratio garantía de 1.97x en 2025. La deuda a largo plazo se redujo de €59.9M (2022) a €17.2M (2025), mejorando el perfil de vencimientos. El patrimonio neto creció un 150% en 5 años (€76.2M → €190.7M). El endeudamiento I bajó de 2.04x (2021) a 1.03x (2025), indicando mejora estructural.</p></div>
-    <div class="narr"><span class="narr-badge nb-ok">Positivo</span><h3>📈 Rentabilidad</h3><p>Las ventas crecieron un 63.6% en 5 años (CAGR ~10.3%), alcanzando €650.3M en 2025. El ejercicio 2024 fue atípico con resultado neto de -€13.4M por un deterioro financiero extraordinario de ~€35.9M. En 2025 se recupera con €33.9M de beneficio neto. ROE post-impuestos: 17.8%.</p></div>
-
-    <div class="narr"><span class="narr-badge nb-neu">Estructura</span><h3>⚙️ Costes</h3><p>Los aprovisionamientos (~60.7% de ventas) son el principal coste. Los gastos de personal suponen un 19.3% de ventas (€125.8M), con crecimiento del 62.5% en 5 años. Los otros gastos de explotación (15.4% sobre ventas) se han gestionado eficientemente. La amortización (2.7%) refleja inversión sostenida.</p></div>
-    <div class="narr"><span class="narr-badge nb-ok">Global</span><h3>🎯 Valoración Global</h3><p>Empresa en sólida expansión comercial con base patrimonial reforzada. Puntos de atención: (1) ratio corriente &lt; 1x; (2) volatilidad en resultados por impactos extraordinarios (2024); (3) crecimiento de existencias. Fortalezas: crecimiento de ventas sostenido, reducción de deuda L/P y fortalecimiento del PN.</p></div>
+    <div class="narr"><span class="narr-badge nb-warn">Alerta</span><h3>💧 Liquidez y Tesorería</h3><p>El ratio corriente se sitúa en 0.85x en 2025, por debajo de 1x, indicando que el pasivo corriente supera al activo corriente. La tesorería se contrajo desde €80.6M (2021) hasta €4.0M (2024), con una recuperación parcial a €17.9M en 2025. La prueba ácida (0.30x) confirma la dependencia de las existencias para hacer frente a compromisos inmediatos.</p></div>
+    <div class="narr"><span class="narr-badge nb-ok">Positivo</span><h3>🏛️ Solvencia y Endeudamiento</h3><p>Ratio de garantía de 1.97x en 2025. La deuda a largo plazo se redujo de €59.9M (2022) a €17.2M (2025), mejorando el perfil de vencimientos. El patrimonio neto creció un 150% en 5 años (€76.2M → €190.7M). El endeudamiento I bajó de 2.04x (2021) a 1.03x (2025), indicando una mejora estructural notable.</p></div>
+    <div class="narr"><span class="narr-badge nb-ok">Positivo</span><h3>📈 Rentabilidad</h3><p>Las ventas crecieron un 63.6% en 5 años (CAGR ~10.3%), alcanzando €650.3M en 2025. El ejercicio 2024 fue atípico con resultado neto de -€13.4M por un deterioro financiero extraordinario de ~€35.9M. En 2025 se recupera con €33.9M de beneficio, ROE post-impuestos del 17.8% y margen neto del 5.2%.</p></div>
+    <div class="narr"><span class="narr-badge nb-info">Análisis</span><h3>🔧 Apalancamiento Financiero</h3><p>El AF en 2025 es de 1.92x, el más bajo del período. El spread (ROA 12.1% > Coste Deuda 1.3%) es positivo, lo que confirma que la deuda sigue creando valor. La tendencia decreciente del AF refleja el proceso de desapalancamiento progresivo, con una reducción de deuda total de €235.6M (2024) a €196.4M (2025).</p></div>
+    <div class="narr"><span class="narr-badge nb-neu">Estructura</span><h3>⚙️ Costes</h3><p>Los aprovisionamientos representan ~60.7% de ventas, estable respecto a ejercicios anteriores. Los gastos de personal suponen el 19.3% de ventas (€125.8M), con un crecimiento del 62.5% en 5 años, en línea con la expansión comercial. La amortización (2.7%) refleja inversión sostenida en activos e instalaciones.</p></div>
+    <div class="narr"><span class="narr-badge nb-ok">Global</span><h3>🎯 Valoración Global</h3><p>Empresa en sólida expansión con base patrimonial reforzada. Puntos de atención: (1) ratio corriente < 1x requiere vigilancia del circulante; (2) volatilidad en resultados por impactos extraordinarios (2024); (3) crecimiento de existencias que puede presionar la liquidez. Fortalezas: ventas crecientes, reducción de deuda L/P y fortalecimiento continuo del PN.</p></div>
   </div>
 </div>
 
-<div class="footer">Sprinter S.A. · Cuentas No Consolidadas PGC 2007 · Datos: hoja "Análisis Completo" · Dashboard Financiero v2</div>
+<div class="footer">Sprinter S.A. · Cuentas No Consolidadas PGC 2007 · Fuente: hoja "Análisis Completo" · Dashboard Financiero v4</div>
 
-<!-- ═════════════════ SCRIPTS ═════════════════ -->
+<!-- ═══════════ SCRIPTS ═══════════ -->
 <script>
 Chart.defaults.font.family="-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif";
-Chart.defaults.font.size=11;
-Chart.defaults.color='#5a6a82';
+Chart.defaults.font.size=11;Chart.defaults.color='#5a6a82';
 
-function mkChart(id,type,labels,datasets,extra={}){
+function mkC(id,type,labels,datasets,extra={}){
   const ctx=document.getElementById(id);if(!ctx)return;
   return new Chart(ctx,{type,data:{labels,datasets},options:{
     responsive:true,maintainAspectRatio:false,
-    plugins:{legend:{display:false},tooltip:{mode:'index',intersect:false,callbacks:{
-      label:c=>c.dataset.label+': '+(typeof c.parsed.y==='number'?c.parsed.y.toFixed(2):c.parsed.y)
-    }}},
-    scales:{x:{grid:{color:gc}},y:{grid:{color:gc},ticks:{callback:v=>typeof v==='number'&&Math.abs(v)>1e4?(v/1e6).toFixed(0)+'M':v}}},
+    plugins:{legend:{display:false},tooltip:{mode:'index',intersect:false,
+      callbacks:{label:c=>c.dataset.label+': '+(typeof c.parsed.y==='number'?c.parsed.y.toFixed(2):c.parsed.y)}}},
+    scales:{x:{grid:{color:gc},ticks:{maxRotation:0}},
+            y:{grid:{color:gc},ticks:{callback:v=>typeof v==='number'&&Math.abs(v)>1e4?(v/1e6).toFixed(0)+'M':typeof v==='number'?v.toFixed(2):v}}},
     ...extra
   }});
 }
-function mkLeg(id,items){
-  const el=document.getElementById(id);if(!el)return;
-  el.innerHTML=items.map(([l,c])=>`<span class="li"><span class="ld" style="background:${c}"></span>${l}</span>`).join('');
-}
+function mkLeg(id,items){const el=document.getElementById(id);if(!el)return;
+  el.innerHTML=items.map(([l,c])=>`<span class="li"><span class="ld" style="background:${c}"></span>${l}</span>`).join('')}
 
-// ── KPI Cards ────────────────────────────────────────────────
+// ── KPI CARDS ──────────────────────────────────────────────
 function renderKPIs(){
   const i=SI;
   const cards=[
-    {l:'Ventas Netas',v:fM(D.ventas[i]),a:D.ventas,cl:'c-navy'},
-    {l:'EBITDA',v:fM(D.ebitda[i]),a:D.ebitda,cl:'c-green'},
-    {l:'Resultado Neto',v:fM(D.rn[i]),a:D.rn,cl:D.rn[i]<0?'c-red':'c-green'},
-    {l:'Total Activo',v:fM(D.activo[i]),a:D.activo,cl:'c-blue'},
-    {l:'Patrimonio Neto',v:fM(D.pn[i]),a:D.pn,cl:'c-teal'},
-    {l:'ROE (post imp.)',v:fP(D.roe_desp[i]),a:D.roe_desp,cl:'c-gold'},
-    {l:'Ratio Corriente',v:fX(D.r_corr[i]),a:D.r_corr,cl:D.r_corr[i]>=1?'c-blue':'c-red'},
+    {l:'Ventas Netas',v:fM(D.ventas[i]),a:D.ventas,c:'cn'},
+    {l:'EBITDA',v:fM(D.ebitda[i]),a:D.ebitda,c:'cg'},
+    {l:'Resultado Neto',v:fM(D.rn[i]),a:D.rn,c:D.rn[i]<0?'cr':'cg'},
+    {l:'Total Activo',v:fM(D.activo[i]),a:D.activo,c:'cb'},
+    {l:'Patrimonio Neto',v:fM(D.pn[i]),a:D.pn,c:'ct'},
+    {l:'ROE (post imp.)',v:fP(D.roe_desp[i]),a:D.roe_desp,c:'cgo'},
+    {l:'Ratio Corriente',v:fX(D.r_corr[i]),a:D.r_corr,c:D.r_corr[i]>=1?'cb':'cr'},
+    {l:'Endeudamiento I',v:fX(D.endeu1[i]),a:D.endeu1,c:'cp'},
   ];
   document.getElementById('kpis').innerHTML=cards.map(k=>`
-    <div class="kpi ${k.cl}">
+    <div class="kpi ${k.c}">
       <div class="kpi-lbl">${k.l}</div>
       <div class="kpi-val">${k.v}</div>
-      <div class="kpi-yoy">${yoyHtml(k.a,i)}<span style="color:var(--text3);font-size:10px;margin-left:3px">vs ${YRS[i-1]||'—'}</span></div>
+      <div class="kpi-yoy">${yoyH(k.a,i)}</div>
     </div>`).join('');
 }
 
-// ── Ratio Panel ──────────────────────────────────────────────
+// ── RATIOS PAGE ─────────────────────────────────────────────
+function rcCard(name,formula,val,fmtFn,ref,okFn,arr,i){
+  const v=fmtFn(val);
+  const ok=okFn(val);
+  const cls=ok===null?'neu':ok?'ok':'warn';
+  return`<div class="ratio-card">
+    <div><div class="rc-name">${name}</div>
+    ${ref?`<span class="rc-ref">${ref}</span>`:''}
+    <div class="rc-yoy">${yoyH(arr,i)}</div></div>
+    <div class="rc-val ${cls}">${v}</div>
+  </div>`;
+}
+
 function renderRatios(){
-  const i=SI;
-  const groups=[
-    {t:'Liquidez',cl:'liq',items:[
-      {n:'Ratio Corriente',v:D.r_corr[i],f:fX,ref:'>1.0x',ok:D.r_corr[i]>=1},
-      {n:'Prueba Ácida',v:D.pr_acida[i],f:fX,ref:'>0.5x',ok:D.pr_acida[i]>=0.5},
-      {n:'Ratio Tesorería',v:D.r_tes[i],f:fX,ref:'>0.1x',ok:D.r_tes[i]>=0.1},
-    ]},
-    {t:'Solvencia',cl:'sol',items:[
-      {n:'Ratio Garantía',v:D.garantia[i],f:fX,ref:'>1.5x',ok:D.garantia[i]>=1.5},
-      {n:'Endeudamiento I',v:D.endeu1[i],f:fX,ref:'<2.0x',ok:D.endeu1[i]<=2},
-      {n:'Cob. Intereses',v:D.cob_int[i],f:v=>v.toFixed(1)+'x',ref:'>3x',ok:D.cob_int[i]>=3},
-    ]},
-    {t:'Rentabilidad',cl:'ren',items:[
-      {n:'Margen EBITDA',v:D.m_ebitda[i],f:fP,ref:'>8%',ok:D.m_ebitda[i]>=0.08},
-      {n:'ROE %',v:D.roe_desp[i],f:fP,ref:'>10%',ok:D.roe_desp[i]>=0.10},
-      {n:'ROA %',v:D.roa[i],f:fP,ref:'>5%',ok:D.roa[i]>=0.05},
-    ]}
-  ];
-  document.getElementById('ratioPanel').innerHTML=groups.map(g=>`
-    <div class="rg">
-      <div class="rg-hdr ${g.cl}">${g.t}</div>
-      ${g.items.map(it=>`
-        <div class="rr">
-          <span class="rn">${it.n}</span>
-          <span class="rv ${it.ok?'ok':'warn'}">${it.f(it.v)}</span>
-          <span class="rref">${it.ref}</span>
-        </div>`).join('')}
-    </div>`).join('');
+  const i=SI;const yr=YRS[i];
+
+  // ── LIQUIDEZ ──
+  document.getElementById('rc_liq').innerHTML=[
+    rcCard('Ratio Corriente','AC / PC',D.r_corr[i],v=>fX(v,2),'>1.0x',v=>v>=1,D.r_corr,i),
+    rcCard('Prueba Ácida','(AC−Exist) / PC',D.pr_acida[i],v=>fX(v,2),'>0.5x',v=>v>=0.5,D.pr_acida,i),
+    rcCard('Ratio Tesorería','Tesorería / PC',D.r_tes[i],v=>fX(v,2),'>0.1x',v=>v>=0.1,D.r_tes,i),
+  ].join('');
+  const rc=D.r_corr[i];const pa=D.pr_acida[i];const rt=D.r_tes[i];
+  const liqOk=rc>=1;
+  document.getElementById('rs_liq').innerHTML=`
+    <span class="chip ${liqOk?'chip-ok':'chip-warn'}">${liqOk?'✓ Aceptable':'⚠ Presión'}</span>
+    <b>Año ${yr}:</b> El ratio corriente (${fX(rc,2)}) ${liqOk?'supera la unidad, indicando capacidad para cubrir el pasivo corriente con el activo corriente.':'está por debajo de 1x, lo que indica que el pasivo corriente supera al activo corriente — situación de presión de liquidez a corto plazo.'}
+    La prueba ácida (${fX(pa,2)}) ${pa>=0.5?'se sitúa en un nivel aceptable':'es baja, reflejando alta dependencia de existencias para atender compromisos'}.
+    La tesorería disponible cubre el ${(rt*100).toFixed(1)}% del pasivo corriente (${rt>=0.1?'nivel mínimo aceptable':'nivel muy bajo — riesgo de tensiones de tesorería'}).`;
+
+  // ── CAPACIDAD DEVOLUCIÓN ──
+  const cdp=D.cap_dev_pos[i];const cdn=D.cap_dev_neg[i];
+  const cbp=D.cap_ban_pos[i];const cbn=D.cap_ban_neg[i];
+  document.getElementById('rc_cap').innerHTML=[
+    rcCard('Cap. Dev. Deuda Total+','EBITDA / Deuda Total',cdp,v=>fX(v,2),'>0.25x',v=>v>=0.25,D.cap_dev_pos,i),
+    rcCard('Años Dev. Deuda Total','Deuda Total / EBITDA',cdn,v=>v.toFixed(1)+' años','<5 años',v=>v<=5,D.cap_dev_neg,i),
+    rcCard('Cap. Dev. Deuda Bancaria+','EBITDA / D.Bancaria',cbp,v=>fX(v,2),'>1x',v=>v>=1,D.cap_ban_pos,i),
+    rcCard('Años Dev. D.Bancaria','D.Bancaria / EBITDA',cbn,v=>v.toFixed(1)+' años','<3 años',v=>v<=3,D.cap_ban_neg,i),
+  ].join('');
+  document.getElementById('rs_cap').innerHTML=`
+    <span class="chip ${cdn<=5?'chip-ok':'chip-warn'}">${cdn<=5?'✓ Manejable':'⚠ Elevado'}</span>
+    <b>Año ${yr}:</b> Con ${cdn.toFixed(1)} años para devolver la deuda total, la empresa ${cdn<=5?'se sitúa en un nivel manejable (umbral referencial: 5 años).':'supera el umbral de 5 años, lo que puede limitar su capacidad de nueva financiación.'}
+    El EBITDA (${fM(D.ebitda[i])}) cubre ${(cdp*100).toFixed(1)}% de la deuda total (${fM(D.deuda_tot[i])}) al año.
+    La deuda bancaria tarda ${cbn.toFixed(1)} años en devolverse ${cbn<=3?'— nivel confortable':'— por encima del umbral recomendado de 3 años'}.`;
+
+  // ── SOLVENCIA ──
+  const g=D.garantia[i];const e1=D.endeu1[i];const e2=D.endeu2[i];const ci=D.cob_int[i];
+  document.getElementById('rc_sol').innerHTML=[
+    rcCard('Ratio Garantía','Activo Total / Deuda',g,v=>fX(v,2),'>1.5x',v=>v>=1.5,D.garantia,i),
+    rcCard('Autonomía Financiera','PN / Deuda Total',D.autonomia[i],v=>fX(v,2),'>0.5x',v=>v>=0.5,D.autonomia,i),
+    rcCard('Endeudamiento I','Deuda / PN',e1,v=>fX(v,2),'<2.0x',v=>v<=2,D.endeu1,i),
+    rcCard('Endeudamiento C/P','PC / PN',D.endeu_cp[i],v=>fX(v,2),'<1.5x',v=>v<=1.5,D.endeu_cp,i),
+    rcCard('Endeudamiento L/P','PNC / PN',D.endeu_lp[i],v=>fX(v,2),'<1.0x',v=>v<=1,D.endeu_lp,i),
+    rcCard('Endeudamiento II %','Deuda / Activo',e2,v=>fP(v),'<60%',v=>v<=0.60,D.endeu2,i),
+    rcCard('Cobertura Intereses','EBIT / G.Financieros',ci,v=>v.toFixed(1)+'x','>3x',v=>v>=3,D.cob_int,i),
+  ].join('');
+  document.getElementById('rs_sol').innerHTML=`
+    <span class="chip ${g>=1.5?'chip-ok':'chip-warn'}">${g>=1.5?'✓ Solvente':'⚠ Revisar'}</span>
+    <b>Año ${yr}:</b> La empresa mantiene solvencia estructural con un ratio de garantía de ${fX(g,2)} — los activos cubren ${(g*100).toFixed(0)}% de las deudas totales.
+    El endeudamiento I (${fX(e1,2)}) ${e1<=2?'está dentro del rango aceptable':'supera el umbral de referencia de 2x'}.
+    La deuda representa el ${(e2*100).toFixed(1)}% del activo total. La cobertura de intereses (${ci.toFixed(1)}x) ${ci>=3?'es holgada — el EBIT cubre con creces los gastos financieros':'está bajo el mínimo referencial de 3x'}.`;
+
+  // ── RENTABILIDAD ──
+  const ra=D.roe_ant[i];const rd=D.roe_desp[i];const roa=D.roa[i];const me=D.m_econ[i];const rot=D.rotacion[i];
+  document.getElementById('rc_ren').innerHTML=[
+    rcCard('ROE (ant. imp.)','RAI / PN',ra,fP,'>10%',v=>v>=0.10,D.roe_ant,i),
+    rcCard('ROE (post imp.)','RN / PN',rd,fP,'>8%',v=>v>=0.08,D.roe_desp,i),
+    rcCard('ROA (Rent. Económica)','EBIT / Activo Total',roa,fP,'>5%',v=>v>=0.05,D.roa,i),
+    rcCard('Margen Económico','EBIT / Ventas',me,fP,'>6%',v=>v>=0.06,D.m_econ,i),
+    rcCard('Margen EBITDA','EBITDA / Ventas',D.m_ebitda[i],fP,'>8%',v=>v>=0.08,D.m_ebitda,i),
+    rcCard('Margen Neto','RN / Ventas',D.m_neto[i],fP,'>4%',v=>v>=0.04,D.m_neto,i),
+    rcCard('Rotación del Activo','Ventas / Activo Total',rot,v=>fX(v,2),'>1x',v=>v>=1,D.rotacion,i),
+  ].join('');
+  document.getElementById('rs_ren').innerHTML=`
+    <span class="chip ${roa>=0.05?'chip-ok':'chip-warn'}">${roa>=0.05?'✓ Rentable':'⚠ Bajo/Negativo'}</span>
+    <b>Año ${yr}:</b> El ROE post-impuestos es ${fP(rd)} — ${rd>=0.08?'por encima del umbral mínimo de referencia del 8%':'por debajo del umbral de referencia o negativo'}.
+    La rentabilidad económica (ROA ${fP(roa)}) ${roa>=0.05?'indica que los activos generan valor de forma eficiente':'está bajo o en terreno negativo, indicando ineficiencia en el uso de activos'}.
+    El margen EBITDA del ${fP(D.m_ebitda[i])} y la rotación del activo (${fX(rot,2)}) explican la capacidad operativa de la empresa. ${rot>=1.5?'La alta rotación compensa márgenes unitarios moderados.':'La rotación está en un nivel moderado.'}`;
+
+  // ── APALANCAMIENTO ──
+  const af=D.apalancamiento[i];const cd=D.coste_deuda[i];const spread=roa-cd;
+  document.getElementById('rc_apal').innerHTML=[
+    rcCard('Apalancamiento Fin.','ROE ant. / ROA',af,v=>fX(v,2),'>1x',v=>v>1,D.apalancamiento,i),
+    rcCard('Coste de la Deuda','GF / Deuda Total',cd,fP,'<5%',v=>v<0.05,D.coste_deuda,i),
+    rcCard('Spread (ROA−Coste)','ROA − Coste Deuda',spread,fP,'>0%',v=>v>0,null,i),
+    rcCard('ROA','EBIT / Activo',roa,fP,'>5%',v=>v>=0.05,D.roa,i),
+  ].join('');
+  const apalOk=af>1&&spread>0;
+  document.getElementById('rs_apal').innerHTML=`
+    <span class="chip ${apalOk?'chip-ok':spread<0?'chip-warn':'chip-neu'}">${apalOk?'✓ Positivo':spread<0?'⚠ Efecto inverso':'~ Neutro'}</span>
+    <b>Año ${yr}:</b> El apalancamiento financiero es ${fX(af,2)}.
+    ${apalOk
+      ?`El spread es positivo (ROA ${fP(roa)} > Coste Deuda ${fP(cd)} = ${fP(spread)}): la empresa gana más con sus activos de lo que le cuesta la deuda, por lo que endeudarse <b>crea valor</b> y amplifica el ROE (${fP(ra)}) por encima del ROA.`
+      :spread<0
+      ?`El spread es negativo (ROA ${fP(roa)} < Coste Deuda ${fP(cd)}): la deuda <b>destruye valor</b> — se paga más por financiarse de lo que rinden los activos.`
+      :`El ROA (${fP(roa)}) está en terreno negativo o muy bajo, lo que distorsiona la interpretación del apalancamiento.`}
+    Tendencia: el AF ha bajado desde 2.95x (2021) hasta 1.92x (2025), reflejando el proceso de desapalancamiento progresivo.`;
 }
 
-
-
-// ── Waterfall ────────────────────────────────────────────────
+// ── WATERFALL ────────────────────────────────────────────
 function renderWaterfall(){
-  const i=SI;
-  const v=D.ventas[i];
+  const i=SI;const v=D.ventas[i];
   const rows=[
     {l:'Ventas = 100%',p:1,cls:'total'},
     {l:'(−) Aprovisionamientos',p:Math.abs(D.aprov[i]/v),neg:true},
     {l:'(+) Otros Ingresos Expl.',p:D.otros_ing[i]/v,neg:false},
     {l:'(−) Gastos Personal',p:Math.abs(D.g_personal[i]/v),neg:true},
     {l:'(−) Otros Gastos Expl.',p:Math.abs(D.otros_g[i]/v),neg:true},
-    {l:'→ Margen Bruto Operativo',p:(v+D.aprov[i]+D.otros_ing[i]+D.g_personal[i]+D.otros_g[i])/v,cls:'sub-total'},
+    {l:'→ Margen Bruto Operativo',p:(v+D.aprov[i]+D.otros_ing[i]+D.g_personal[i]+D.otros_g[i])/v,cls:'sub'},
     {l:'(−) Amortización',p:Math.abs(D.amort[i]/v),neg:true},
-    {l:'→ Margen EBIT',p:D.m_ebit[i],cls:'sub-total'},
+    {l:'→ Margen EBIT',p:D.m_ebit[i],cls:'sub'},
     {l:'→ Margen Neto',p:D.m_neto[i],cls:'final'},
   ];
   document.getElementById('wfCard').innerHTML=
-    `<div style="font-size:11px;font-weight:700;color:var(--navy);text-transform:uppercase;letter-spacing:.4px;margin-bottom:12px">Cascada márgenes — ${YRS[i]}</div>`+
+    `<div class="wf-title">Cascada Márgenes — ${YRS[i]}</div>`+
     rows.map(r=>{
-      const pctStr=(r.p*100).toFixed(1)+'%';
-      const bw=Math.min(100,Math.abs(r.p)*100);
-      const bc=r.cls==='final'?'transparent':r.cls==='sub-total'?'#70AD47':r.neg?'#FCE4D6':'#BDD7EE';
-      const tc=r.cls==='final'?'#fff':r.neg?'#C00000':r.cls==='sub-total'?'#375623':'#1F3864';
+      const pct=(r.p*100).toFixed(1)+'%';
+      const bw=Math.min(100,Math.abs(r.p*100));
+      const bc=r.cls==='final'?'transparent':r.cls==='sub'?'#70AD47':r.neg?'#FCE4D6':'#BDD7EE';
+      const tc=r.cls==='final'?'#fff':r.neg?'#C00000':r.cls==='sub'?'#375623':'#1F3864';
       return`<div class="wf-row ${r.cls||''}">
-        <span class="wf-label">${r.l}</span>
-        <span class="wf-pct" style="color:${tc}">${pctStr}</span>
-      </div>
-      ${r.cls!=='final'?`<div class="wf-bar" style="width:${bw}%;background:${bc}"></div>`:''}`;
+        <span class="wf-lbl">${r.l}</span>
+        <span class="wf-pct" style="color:${tc}">${pct}</span>
+      </div>${r.cls!=='final'?`<div class="wf-bar" style="width:${bw}%;background:${bc}"></div>`:''}`;
     }).join('');
 }
 
-// ── Big Table ────────────────────────────────────────────────
-function cagr(a){
-  const s=a[0],e=a[5];
-  if(!s||s<=0||!e||e<=0)return'—';
-  return((Math.pow(e/s,0.2)-1)*100).toFixed(1)+'%';
-}
+// ── BIG TABLE ────────────────────────────────────────────
+function cagr(a){const s=a[0],e=a[5];if(!s||s<=0||!e||e<=0)return'—';return((Math.pow(e/s,.2)-1)*100).toFixed(1)+'%'}
 function buildTable(){
   const el=document.getElementById('bigTable');if(!el)return;
-  const yh=YRS.map(y=>`<th>${y}</th>`).join('');
+  // Current year = SI, prior year = SI+1 (since array is 2025→2020)
+  const ci=SI, pi=Math.min(SI+1,5);
+  const yrC=YRS[ci], yrP=YRS[pi];
+  const isFirst=(ci===5); // 2020 has no prior
+
   const rows=[
     {g:'Cuenta de Resultados'},
-    {l:'Ventas Netas (€M)',a:D.ventas,f:v=>(v/1e6).toFixed(1)},
-    {l:'EBITDA (€M)',a:D.ebitda,f:v=>(v/1e6).toFixed(1)},
-    {l:'Margen EBITDA %',a:D.m_ebitda,f:v=>(v*100).toFixed(1)+'%',nc:true},
+    {l:'Ventas Netas (€M)',a:D.ventas,f:v=>(v/1e6).toFixed(1),sc:false},
+    {l:'EBITDA (€M)',a:D.ebitda,f:v=>(v/1e6).toFixed(1),sc:false},
+    {l:'Margen EBITDA %',a:D.m_ebitda,f:v=>(v*100).toFixed(1)+'%',pct:true},
     {l:'EBIT (€M)',a:D.ebit,f:v=>(v/1e6).toFixed(1)},
-    {l:'Margen EBIT %',a:D.m_ebit,f:v=>(v*100).toFixed(1)+'%',nc:true},
+    {l:'Margen EBIT %',a:D.m_ebit,f:v=>(v*100).toFixed(1)+'%',pct:true},
     {l:'Resultado Neto (€M)',a:D.rn,f:v=>(v/1e6).toFixed(1),sc:true},
-    {l:'Margen Neto %',a:D.m_neto,f:v=>(v*100).toFixed(1)+'%',nc:true,sc:true},
+    {l:'Margen Neto %',a:D.m_neto,f:v=>(v*100).toFixed(1)+'%',pct:true,sc:true},
+    {l:'Gastos Personal (€M)',a:D.g_personal,f:v=>(v/1e6).toFixed(1)},
+    {l:'Amortización (€M)',a:D.amort,f:v=>(v/1e6).toFixed(1)},
     {g:'Balance'},
     {l:'Total Activo (€M)',a:D.activo,f:v=>(v/1e6).toFixed(1)},
     {l:'Patrimonio Neto (€M)',a:D.pn,f:v=>(v/1e6).toFixed(1)},
     {l:'Pasivo No Corriente (€M)',a:D.pnc,f:v=>(v/1e6).toFixed(1)},
     {l:'Pasivo Corriente (€M)',a:D.pc,f:v=>(v/1e6).toFixed(1)},
     {l:'Tesorería (€M)',a:D.tesorer,f:v=>(v/1e6).toFixed(1)},
+    {l:'Existencias (€M)',a:D.exist,f:v=>(v/1e6).toFixed(1)},
     {g:'Ratios de Liquidez'},
-    {l:'Ratio Corriente',a:D.r_corr,f:v=>v.toFixed(2)+'x',nc:true},
-    {l:'Prueba Ácida',a:D.pr_acida,f:v=>v.toFixed(2)+'x',nc:true},
-    {l:'Ratio Tesorería',a:D.r_tes,f:v=>v.toFixed(2)+'x',nc:true},
-    {g:'Ratios de Solvencia'},
-    {l:'Ratio Garantía',a:D.garantia,f:v=>v.toFixed(2)+'x',nc:true},
-    {l:'Endeudamiento I (Deuda/PN)',a:D.endeu1,f:v=>v.toFixed(2)+'x',nc:true},
-    {l:'Endeudamiento II %',a:D.endeu2,f:v=>(v*100).toFixed(1)+'%',nc:true},
-    {l:'Cobertura Intereses',a:D.cob_int,f:v=>v.toFixed(1)+'x',nc:true},
+    {l:'Ratio Corriente',a:D.r_corr,f:v=>v.toFixed(2)+'x'},
+    {l:'Prueba Ácida',a:D.pr_acida,f:v=>v.toFixed(2)+'x'},
+    {l:'Ratio Tesorería',a:D.r_tes,f:v=>v.toFixed(2)+'x'},
+    {g:'Capacidad de Devolución'},
+    {l:'Años Dev. Deuda Total',a:D.cap_dev_neg,f:v=>v.toFixed(1)+' a'},
+    {l:'Cap. Dev. Total (x)',a:D.cap_dev_pos,f:v=>v.toFixed(2)+'x'},
+    {l:'Años Dev. Deuda Bancaria',a:D.cap_ban_neg,f:v=>v.toFixed(1)+' a'},
+    {g:'Solvencia'},
+    {l:'Ratio Garantía',a:D.garantia,f:v=>v.toFixed(2)+'x'},
+    {l:'Autonomía Financiera',a:D.autonomia,f:v=>v.toFixed(2)+'x'},
+    {l:'Endeudamiento I',a:D.endeu1,f:v=>v.toFixed(2)+'x'},
+    {l:'Endeudamiento II %',a:D.endeu2,f:v=>(v*100).toFixed(1)+'%',pct:true},
+    {l:'Cobertura Intereses',a:D.cob_int,f:v=>v.toFixed(1)+'x'},
     {g:'Rentabilidad'},
-    {l:'ROE (ant. imp.) %',a:D.roe_ant,f:v=>(v*100).toFixed(1)+'%',nc:true,sc:true},
-    {l:'ROE (post imp.) %',a:D.roe_desp,f:v=>(v*100).toFixed(1)+'%',nc:true,sc:true},
-    {l:'ROA %',a:D.roa,f:v=>(v*100).toFixed(1)+'%',nc:true,sc:true},
-    {l:'Margen Económico %',a:D.m_econ,f:v=>(v*100).toFixed(1)+'%',nc:true,sc:true},
-    {l:'Rotación Activo',a:D.rotacion,f:v=>v.toFixed(2)+'x',nc:true},
-
+    {l:'ROE (ant. imp.) %',a:D.roe_ant,f:v=>(v*100).toFixed(1)+'%',pct:true,sc:true},
+    {l:'ROE (post imp.) %',a:D.roe_desp,f:v=>(v*100).toFixed(1)+'%',pct:true,sc:true},
+    {l:'ROA %',a:D.roa,f:v=>(v*100).toFixed(1)+'%',pct:true,sc:true},
+    {l:'Margen Económico %',a:D.m_econ,f:v=>(v*100).toFixed(1)+'%',pct:true,sc:true},
+    {l:'Rotación Activo',a:D.rotacion,f:v=>v.toFixed(2)+'x'},
+    {g:'Apalancamiento Financiero'},
+    {l:'Apalancamiento Fin. (RF/RE)',a:D.apalancamiento,f:v=>v.toFixed(2)+'x'},
+    {l:'Coste de la Deuda %',a:D.coste_deuda,f:v=>(v*100).toFixed(2)+'%',pct:true},
   ];
+
+  function varCell(vc,pc,sc,pct){
+    if(isFirst||pc==null||pc===0)return'<td class="var-na">—</td>';
+    const v=(vc-pc)/Math.abs(pc);
+    const pos=v>=0;
+    const neg=sc&&vc<0;
+    const arrow=pos?'▲':'▼';
+    const cls=pos?'var-pos':'var-neg';
+    return`<td class="${cls}">${arrow} ${Math.abs(v*100).toFixed(1)}%</td>`;
+  }
+
+  function absCell(v,f,sc){
+    const n=+v,t=f(v);
+    const ng=sc&&n<0,ps=sc&&n>0;
+    return`<td class="${ng?'neg':ps?'pos':''}">${t}</td>`;
+  }
+
+  const titleRow=isFirst
+    ?`<tr><th class="tl">Indicador</th><th>${yrC}</th><th style="background:#C9A227">CAGR 5A</th></tr>`
+    :`<tr><th class="tl">Indicador</th><th>${yrC}</th><th>${yrP}</th><th class="var-hdr">Variación</th></tr>`;
+
   const body=rows.map(r=>{
-    if(r.g)return`<tr><td colspan="8" class="grp">${r.g}</td></tr>`;
-    const cells=r.a.map(v=>{
-      const txt=r.f(v);
-      const neg=r.sc&&v<0;const pos=r.sc&&v>0;
-      return`<td class="${neg?'neg':pos?'pos':''}">${txt}</td>`;
-    }).join('');
-    const cg=r.nc?'<td>—</td>':`<td class="cagr">${cagr(r.a)}</td>`;
-    return`<tr><td class="tl">${r.l}</td>${cells}${cg}</tr>`;
+    if(r.g)return`<tr><td colspan="${isFirst?3:4}" class="grp">${r.g}</td></tr>`;
+    const vc=r.a[ci], pc=r.a[pi];
+    const c1=absCell(vc,r.f,r.sc);
+    if(isFirst){
+      const cg=`<td class="cagr">${cagr(r.a)}</td>`;
+      return`<tr><td class="tl">${r.l}</td>${c1}${cg}</tr>`;
+    }
+    const c2=absCell(pc,r.f,r.sc);
+    const cv=varCell(vc,pc,r.sc,r.pct);
+    return`<tr><td class="tl">${r.l}</td>${c1}${c2}${cv}</tr>`;
   }).join('');
-  el.innerHTML=`<table><thead><tr><th class="tl">Indicador</th>${yh}<th style="background:#C9A227">CAGR</th></tr></thead><tbody>${body}</tbody></table>`;
+
+  const colspan=isFirst?3:4;
+  el.innerHTML=`<table><thead>${titleRow}</thead><tbody>${body}</tbody></table>`;
+  const tspan=document.getElementById('tabTitle');
+  if(tspan)tspan.textContent=isFirst?`${yrC} (base)`:`${yrC} vs ${yrP}`;
 }
 
-// ── Chart builders ────────────────────────────────────────────
+// ── CHARTS ───────────────────────────────────────────────
 function initCharts(){
   const M=a=>a.map(v=>+(v/1e6).toFixed(2));
+  const pctOpts={scales:{x:{grid:{color:gc},ticks:{maxRotation:0}},y:{grid:{color:gc},ticks:{callback:v=>v+'%'}}}};
 
+  // Overview
   mkLeg('l1',[['Ventas',C.navy],['EBITDA',C.green],['EBIT',C.blue],['Res.Neto',C.orange]]);
-  mkChart('c1','bar',YL,[
+  mkC('c1','bar',YL,[
     {label:'Ventas',data:M(D.ventas),backgroundColor:C.navy+'CC'},
     {label:'EBITDA',data:M(D.ebitda),backgroundColor:C.green+'CC'},
     {label:'EBIT',data:M(D.ebit),backgroundColor:C.blue+'CC'},
     {label:'Res.Neto',data:M(D.rn),backgroundColor:D.rn.map(v=>v<0?C.red+'CC':C.orange+'CC')},
   ]);
-
   mkLeg('l2',[['EBITDA%',C.green],['EBIT%',C.blue],['Neto%',C.orange]]);
-  mkChart('c2','line',YL,[
+  mkC('c2','line',YL,[
     {label:'EBITDA%',data:D.m_ebitda.map(v=>+(v*100).toFixed(2)),borderColor:C.green,backgroundColor:'transparent',tension:.4,pointRadius:4},
     {label:'EBIT%',data:D.m_ebit.map(v=>+(v*100).toFixed(2)),borderColor:C.blue,backgroundColor:'transparent',tension:.4,pointRadius:4},
     {label:'Neto%',data:D.m_neto.map(v=>+(v*100).toFixed(2)),borderColor:C.orange,backgroundColor:'transparent',tension:.4,pointRadius:4},
-  ],{scales:{x:{grid:{color:gc}},y:{grid:{color:gc},ticks:{callback:v=>v+'%'}}}});
-
+  ],pctOpts);
   mkLeg('l3',[['PN',C.green],['PNC',C.blue],['PC',C.red]]);
-  mkChart('c3','bar',YL,[
+  mkC('c3','bar',YL,[
     {label:'PN',data:M(D.pn),backgroundColor:C.green+'CC',stack:'s'},
     {label:'PNC',data:M(D.pnc),backgroundColor:C.blue+'CC',stack:'s'},
     {label:'PC',data:M(D.pc),backgroundColor:C.red+'CC',stack:'s'},
   ],{scales:{x:{stacked:true,grid:{color:gc}},y:{stacked:true,grid:{color:gc}}}});
-
   mkLeg('l4',[['Existencias',C.orange],['Tesorería',C.navy]]);
-  mkChart('c4','line',YL,[
+  mkC('c4','line',YL,[
     {label:'Existencias',data:M(D.exist),borderColor:C.orange,backgroundColor:C.orange+'22',tension:.4,fill:true,pointRadius:4},
     {label:'Tesorería',data:M(D.tesorer),borderColor:C.navy,backgroundColor:C.navy+'22',tension:.4,fill:true,pointRadius:4},
   ]);
 
-  // P&L charts
-  mkChart('cp1','bar',YL,[
-    {label:'Ventas',data:M(D.ventas),backgroundColor:C.navy+'BB',yAxisID:'y'},
-    {label:'EBITDA',data:M(D.ebitda),type:'line',borderColor:C.green,backgroundColor:'transparent',tension:.4,pointRadius:5,yAxisID:'y'},
+  // P&L
+  mkC('cp1','bar',YL,[
+    {label:'Ventas',data:M(D.ventas),backgroundColor:C.navy+'BB'},
+    {label:'EBITDA',type:'line',data:M(D.ebitda),borderColor:C.green,backgroundColor:'transparent',tension:.4,pointRadius:5},
   ]);
-  const cp=[0,1,2,3,4,5].map(i=>[
+  const cp=YRS.map((_,i)=>[
     +(Math.abs(D.aprov[i]/D.ventas[i])*100).toFixed(1),
     +(Math.abs(D.g_personal[i]/D.ventas[i])*100).toFixed(1),
     +(Math.abs(D.otros_g[i]/D.ventas[i])*100).toFixed(1),
     +(Math.abs(D.amort[i]/D.ventas[i])*100).toFixed(1),
   ]);
   mkLeg('lp2',[['Aprovisionam.',C.red],['G.Personal',C.orange],['Otros G.',C.gold],['Amort.',C.gray]]);
-  mkChart('cp2','bar',YL,[
+  mkC('cp2','bar',YL,[
     {label:'Aprovisionam.',data:cp.map(r=>r[0]),backgroundColor:C.red+'BB',stack:'s'},
     {label:'G.Personal',data:cp.map(r=>r[1]),backgroundColor:C.orange+'BB',stack:'s'},
     {label:'Otros G.',data:cp.map(r=>r[2]),backgroundColor:C.gold+'BB',stack:'s'},
     {label:'Amort.',data:cp.map(r=>r[3]),backgroundColor:C.gray+'BB',stack:'s'},
   ],{scales:{x:{stacked:true,grid:{color:gc}},y:{stacked:true,grid:{color:gc},ticks:{callback:v=>v+'%'}}}});
-  mkChart('cp3','bar',YL,[{label:'Resultado Neto',data:M(D.rn),backgroundColor:D.rn.map(v=>v<0?C.red+'CC':C.green+'CC')}]);
+  mkC('cp3','bar',YL,[{label:'Resultado Neto',data:M(D.rn),backgroundColor:D.rn.map(v=>v<0?C.red+'CC':C.green+'CC')}]);
 
   // Balance
   mkLeg('lb1',[['ANC',C.navy],['AC',C.blue]]);
-  mkChart('cb1','bar',YL,[
+  mkC('cb1','bar',YL,[
     {label:'ANC',data:M(D.anc),backgroundColor:C.navy+'CC',stack:'s'},
     {label:'AC',data:M(D.ac),backgroundColor:C.blue+'CC',stack:'s'},
   ],{scales:{x:{stacked:true,grid:{color:gc}},y:{stacked:true,grid:{color:gc}}}});
   mkLeg('lb2',[['PN',C.green],['PNC',C.blue],['PC',C.red]]);
-  mkChart('cb2','bar',YL,[
+  mkC('cb2','bar',YL,[
     {label:'PN',data:M(D.pn),backgroundColor:C.green+'CC',stack:'s'},
     {label:'PNC',data:M(D.pnc),backgroundColor:C.blue+'CC',stack:'s'},
     {label:'PC',data:M(D.pc),backgroundColor:C.red+'CC',stack:'s'},
   ],{scales:{x:{stacked:true,grid:{color:gc}},y:{stacked:true,grid:{color:gc}}}});
-  mkChart('cb3','line',YL,[{label:'Tesorería',data:M(D.tesorer),borderColor:C.navy,backgroundColor:C.navy+'22',tension:.4,fill:true,pointRadius:5}]);
-  mkChart('cb4','line',YL,[{label:'Existencias',data:M(D.exist),borderColor:C.orange,backgroundColor:C.orange+'22',tension:.4,fill:true,pointRadius:5}]);
+  mkC('cb3','line',YL,[{label:'Tesorería',data:M(D.tesorer),borderColor:C.navy,backgroundColor:C.navy+'22',tension:.4,fill:true,pointRadius:5}]);
+  mkC('cb4','line',YL,[{label:'Existencias',data:M(D.exist),borderColor:C.orange,backgroundColor:C.orange+'22',tension:.4,fill:true,pointRadius:5}]);
 
   // Ratios charts
-  mkChart('cr1','line',YL,[
-    {label:'R.Corriente',data:D.r_corr,borderColor:C.navy,backgroundColor:'transparent',tension:.4,pointRadius:4},
-    {label:'Prueba Ácida',data:D.pr_acida,borderColor:C.blue,backgroundColor:'transparent',tension:.4,pointRadius:4},
-    {label:'Tesorería',data:D.r_tes,borderColor:C.green,backgroundColor:'transparent',tension:.4,pointRadius:4},
+  mkLeg('ll1',[['R.Corriente',C.blue],['Prueba Ácida',C.teal2],['Tesorería',C.green]]);
+  mkC('rl1','line',YL,[
+    {label:'R.Corriente',data:D.r_corr,borderColor:C.blue,backgroundColor:'transparent',tension:.4,pointRadius:5},
+    {label:'Prueba Ácida',data:D.pr_acida,borderColor:C.teal2,backgroundColor:'transparent',tension:.4,pointRadius:5},
+    {label:'Tesorería',data:D.r_tes,borderColor:C.green,backgroundColor:'transparent',tension:.4,pointRadius:5},
   ]);
-  mkChart('cr2','bar',YL,[
-    {label:'Endeudamiento I',data:D.endeu1.map(v=>+v.toFixed(2)),backgroundColor:C.red+'CC'},
-    {label:'Garantía',data:D.garantia.map(v=>+v.toFixed(2)),backgroundColor:C.green+'CC'},
+  mkC('rl2','bar',YL,[{label:'Años Dev. Deuda',data:D.cap_dev_neg.map(v=>+v.toFixed(2)),backgroundColor:D.cap_dev_neg.map(v=>v>5?C.red+'CC':C.teal2+'CC')}]);
+  mkC('rl2b','bar',YL,[{label:'EBITDA/Deuda',data:D.cap_dev_pos.map(v=>+v.toFixed(3)),backgroundColor:C.teal2+'CC'}]);
+  mkLeg('ls3',[['Endeudamiento I',C.red],['Garantía',C.green]]);
+  mkC('rl3','bar',YL,[
+    {label:'Endeudamiento I',data:D.endeu1.map(v=>+v.toFixed(2)),backgroundColor:C.red+'BB'},
+    {label:'Garantía',data:D.garantia.map(v=>+v.toFixed(2)),backgroundColor:C.green+'BB'},
   ]);
-  mkChart('cr3','line',YL,[
-    {label:'ROE',data:D.roe_desp.map(v=>+(v*100).toFixed(2)),borderColor:C.orange,backgroundColor:'transparent',tension:.4,pointRadius:4},
-    {label:'ROA',data:D.roa.map(v=>+(v*100).toFixed(2)),borderColor:C.purp,backgroundColor:'transparent',tension:.4,pointRadius:4},
-  ],{scales:{x:{grid:{color:gc}},y:{grid:{color:gc},ticks:{callback:v=>v+'%'}}}});
-  mkChart('cr4','bar',YL,[{label:'Años Dev.',data:D.cap_dev_neg.map(v=>+v.toFixed(2)),backgroundColor:C.gold+'CC'}]);
-
-
+  mkC('rl3b','bar',YL,[{label:'Cob. Intereses',data:D.cob_int.map(v=>+v.toFixed(1)),backgroundColor:D.cob_int.map(v=>v<3?C.red+'CC':C.green+'CC')}]);
+  mkLeg('lr4',[['ROE (ant.)',C.gold],['ROE (post)',C.orange]]);
+  mkC('rl4','line',YL,[
+    {label:'ROE (ant.)',data:D.roe_ant.map(v=>+(v*100).toFixed(2)),borderColor:C.gold,backgroundColor:'transparent',tension:.4,pointRadius:5},
+    {label:'ROE (post)',data:D.roe_desp.map(v=>+(v*100).toFixed(2)),borderColor:C.orange,backgroundColor:'transparent',tension:.4,pointRadius:5},
+  ],pctOpts);
+  mkLeg('lr4b',[['ROA',C.blue],['M.Económico',C.teal2]]);
+  mkC('rl4b','line',YL,[
+    {label:'ROA',data:D.roa.map(v=>+(v*100).toFixed(2)),borderColor:C.blue,backgroundColor:'transparent',tension:.4,pointRadius:5},
+    {label:'M.Económico',data:D.m_econ.map(v=>+(v*100).toFixed(2)),borderColor:C.teal2,backgroundColor:'transparent',tension:.4,pointRadius:5},
+  ],pctOpts);
+  mkC('rl5','bar',YL,[{label:'AF',data:D.apalancamiento.map(v=>+v.toFixed(3)),backgroundColor:D.apalancamiento.map(v=>v>1?C.purp+'CC':C.red+'CC')}]);
+  mkLeg('lr5b',[['ROE (ant.)',C.gold],['ROA',C.blue],['Coste Deuda',C.red]]);
+  mkC('rl5b','line',YL,[
+    {label:'ROE (ant.)',data:D.roe_ant.map(v=>+(v*100).toFixed(2)),borderColor:C.gold,backgroundColor:'transparent',tension:.4,pointRadius:5},
+    {label:'ROA',data:D.roa.map(v=>+(v*100).toFixed(2)),borderColor:C.blue,backgroundColor:'transparent',tension:.4,pointRadius:5},
+    {label:'Coste Deuda',data:D.coste_deuda.map(v=>+(v*100).toFixed(2)),borderColor:C.red,backgroundColor:'transparent',tension:.4,pointRadius:5,borderDash:[5,3]},
+  ],pctOpts);
 }
 
-// ── INIT ─────────────────────────────────────────────────────
-renderKPIs();
-renderRatios();
-renderWaterfall();
-buildTable();
-initCharts();
+// ── INIT ────────────────────────────────────────────────
+renderKPIs();renderRatios();renderWaterfall();buildTable();initCharts();
 </script>
 </body>
 </html>
